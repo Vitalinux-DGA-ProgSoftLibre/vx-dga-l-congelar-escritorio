@@ -1,0 +1,12 @@
+Package: vx-dga-l-congelar-escritorio
+Version: 1.0-9
+Architecture: all
+Maintainer: Ángel Lafuente <angel.lafuentezgz@gmail.com>
+Installed-Size: 46
+Pre-Depends: vx-utils
+Depends: vx-dga-l-skel-usuarios, vx-dga-l-desktop-wallpaper
+Section: x11
+Priority: extra
+Homepage: https://github.com/Vitalinux-DGA-ProgSoftLibre
+Description: Congelación de escritorio.
+ Congelación de escritorio y borrado de ficheros.

@@ -1,0 +1,53 @@
+#!/bin/bash
+#Diseñado por Arturo Martín
+#Proyecto Piloto DGA
+
+usuario=${USER}
+ejecutor=$(whoami)
+
+#if test "$ejecutor" != "root" ; then
+#	exit 1
+#fi
+
+echo "Proceso de congelación del Escritorio para el usuario $usuario - $ejecutor - $(date)" > /home/$usuario/info-congelacion-Escritorio.txt
+
+if test -d /etc/skel/Escritorio ; then
+	if rsync --delete -rl /etc/skel/Escritorio /home/$usuario ; then
+		echo " --> OK: Se ha sincronizado el Escritorio del usuario $usuario ..." >> /home/$usuario/info-congelacion-Escritorio.txt
+	else
+		echo " --> ERROR: No se ha sincronizado el Escritorio del usuario $usuario ..." >> /home/$usuario/info-congelacion-Escritorio.txt
+	fi
+	chown -R $usuario.sudo /home/$usuario/Escritorio
+fi
+if test -d /etc/skel/Desktop ; then
+	if rsync --delete -rl /etc/skel/Desktop /home/$usuario ; then
+		echo " --> OK: Se ha sincronizado el Desktop del usuario $usuario ..." >> /home/$usuario/info-congelacion-Escritorio.txt
+	else
+		echo " --> ERROR: No se ha sincronizado el Desktop del usuario $usuario ..." >> /home/$usuario/info-congelacion-Escritorio.txt
+	fi
+	chown -R $usuario.sudo /home/$usuario/Desktop
+fi
+
+# Eliminamos cualquier panel que se haya creado en el Escritorio que no es el Deseado
+if test -f /usr/share/vitalinux/congelaescritorio/panel ; then
+	cp /usr/share/vitalinux/congelaescritorio/panel /home/$usuario/.config/lxpanel/Lubuntu/panels/panel
+	for FICHERO in $(ls /home/$usuario/.config/lxpanel/Lubuntu/panels | grep -v panel) ; do
+		rm -f /home/$usuario/.config/lxpanel/Lubuntu/panels/$FICHERO
+	done
+	chown $usuario.sudo /home/$usuario/.config/lxpanel/Lubuntu/panels/panel
+fi
+
+# Eliminamos cualquier configuración del Escritorio que se haya realizado
+if test -f /usr/share/vitalinux/congelaescritorio/desktop-items-0.conf ; then
+	if cat /usr/share/vitalinux/congelaescritorio/desktop-items-0.conf > /home/$usuario/.config/pcmanfm/lubuntu/desktop-items-0.conf ; then
+		echo " --> OK: Se ha sincronizado las opciones del Escritorio del usuario $usuario ..." >> /home/$usuario/info-congelacion-Escritorio.txt
+	else
+		echo " --> ERROR: No se ha sincronizado las opciones del Escritorio del usuario $usuario ..." >> /home/$usuario/info-congelacion-Escritorio.txt
+	fi
+	chown $usuario.sudo /home/$usuario/.config/pcmanfm/lubuntu/desktop-items-0.conf
+	for FICHERO in $(ls /home/$usuario/.config/pcmanfm/lubuntu | grep -v desktop-items-0.conf | grep -v pcmanfm.conf) ; do
+		rm -f /home/$usuario/.config/pcmanfm/lubuntu/$FICHERO
+	done
+fi
+#chown -R $usuario /home/$usuario/Escritorio/*
+#chown -R $usuario /home/$usuario/Desktop/*

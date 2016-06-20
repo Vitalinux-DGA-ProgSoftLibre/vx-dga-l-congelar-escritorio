@@ -1,0 +1,7 @@
+vx-dga-l-congelar-escritorio (1.0-9) unstable; urgency=low
+
+  * Paquete para evitar cambios en el Escritorio Lubuntu Vitalinux
+  * El proceso de congelado se produce al cerrar la sesión
+  * Se congela la configuración del escritorio, fuentes, colores, wallpaper e iconos
+
+ -- Arturo Martín <amartinromero@gmail.com>  Mon, 21 Mar 2016 09:52:06 +0200
