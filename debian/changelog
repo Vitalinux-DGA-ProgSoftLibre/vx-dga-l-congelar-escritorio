@@ -1,4 +1,12 @@
-vx-dga-l-congelar-escritorio (1.0-9) unstable; urgency=low
+vx-dga-l-congelar-escritorio (1.1-2) unstable; urgency=low
+
+  * Upgrade a la nueva version de tareas-logout, para que solo se realicen en el caso de cerrar X.
+  * Chequeo en datos de usuario
+  * Reubicación de la tarea en vitalinux postrun
+
+ -- Ignacio Sancho <sannacho@gmail.com>  Mon, 13 Mar 2017 09:52:06 +0200
+
+vx-dga-l-congelar-escritorio (1.1-1) unstable; urgency=low
 
   * Paquete para evitar cambios en el Escritorio Lubuntu Vitalinux
   * El proceso de congelado se produce al cerrar la sesión

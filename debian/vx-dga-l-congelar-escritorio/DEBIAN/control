@@ -1,10 +1,10 @@
 Package: vx-dga-l-congelar-escritorio
-Version: 1.0-9
+Version: 1.1-2
 Architecture: all
 Maintainer: Ángel Lafuente <angel.lafuentezgz@gmail.com>
-Installed-Size: 46
+Installed-Size: 45
 Pre-Depends: vx-utils
-Depends: vx-dga-l-skel-usuarios, vx-dga-l-desktop-wallpaper
+Depends: vx-dga-l-desktop-wallpaper, vx-dga-l-menu, vx-dga-l-migasfree-launcher (>= 5.1), vx-dga-l-skel-usuarios (>= 1.1)
 Section: x11
 Priority: extra
 Homepage: https://github.com/Vitalinux-DGA-ProgSoftLibre

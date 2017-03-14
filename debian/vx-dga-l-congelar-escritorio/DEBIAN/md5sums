@@ -1,5 +1,4 @@
-3e0a1f7fb0c2f684709d74ab88328ec9  usr/bin/congelar-escritorio
-980e99ca2220d8fb0df85dd0f4e7c632  usr/share/doc/vx-dga-l-congelar-escritorio/changelog.Debian.gz
+c9d126d7b7f61a0fc1397a95057cefed  usr/share/doc/vx-dga-l-congelar-escritorio/changelog.Debian.gz
 26557bca67c7775369ca8143314d407d  usr/share/doc/vx-dga-l-congelar-escritorio/copyright
 2a90c78249e4d8c7f61d2dea23ecc2b3  usr/share/vitalinux/congelaescritorio/desktop-items-0.conf
-c626e8185a05d46e678e49203860916b  usr/share/vitalinux/congelaescritorio/panel
+e52e5f289c4c40ba268db23957a6fea9  usr/share/vitalinux/postrun.d/vx-congelar-escritorio.sh
