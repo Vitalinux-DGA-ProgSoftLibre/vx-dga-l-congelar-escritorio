@@ -1,0 +1,122 @@
+#!/bin/bash
+EJECUTOR=$(whoami)
+DIRBASE="/etc/skel/Escritorio"
+
+if ! test "${EJECUTOR}" = "root" ; then
+	echo "#=> Debes acceder con permisos de root para actuar sobre la congelación ..."
+	exit 1
+fi
+
+function usuario_grafico()
+{
+	SEAT_ACTIVO="seat0"
+	SESION_ACTIVA=$(loginctl show-seat ${SEAT_ACTIVO} | grep 'ActiveSession' | cut -d'=' -f2)
+	echo "$(loginctl list-sessions | grep "${SEAT_ACTIVO}" | grep "${SESION_ACTIVA}" | tr -s ' ' ' ' | cut -d' ' -f4)"
+}
+
+USUARIO="$(usuario_grafico)"
+HOMEUSU="$(getent passwd "${USUARIO}" | awk -F ":" '{print $6}')"
+
+function mantener_en_escritorio_congelado() {
+	# Obtenemos la lista de los parámetros recibidos:
+	NUMPARAM="${#}"
+	INCREMENTO="$(echo 100/"$NUMPARAM" | bc)"
+	PORCENTAJE="$(( 0 + INCREMENTO ))"
+	NARCHIVO=1
+	RESULTADO="#"
+	# Comprobamos:
+	# 1) Que hay parámetros todavía por procesar
+	# 2) Si el parámetro es un archivo o directorio exitente en la máquina
+	until test -z "${1}" ; do
+		echo "${PORCENTAJE}"
+		RUTA="${1}"
+
+		if [[ -f "${RUTA}" || -d "${RUTA}" ]] ; then
+			for DESTINO in "/etc/skel/Desktop" "/etc/skel/Escritorio" ; do
+				if test -d "${DESTINO}" ; then
+					echo "#=> Sincronizando ${RUTA} con el sistema de congelación ..."
+					if rsync -ahv "${RUTA}" "${DESTINO}" &> /dev/null ; then
+						RESULTADO="${RESULTADO}=> Ok: ${RUTA} - Sincronizado en el Sistema de Congelación\n"
+					else
+						RESULTADO="${RESULTADO}=> Error: ${RUTA} - No sincronizado con en el Sistema de Congelación\n"
+					fi
+				fi
+			done
+			for DESTINO in "${HOMEUSU}/Desktop" "${HOMEUSU}/Escritorio" ; do
+				if test -d "${DESTINO}" ; then
+					echo "#=> Sincronizando ${RUTA} en ${DESTINO} ..."
+					if rsync -ahv --chown="${USUARIO}":"${USUARIO}" "${RUTA}" "${DESTINO}" ; then
+						RESULTADO="${RESULTADO}\t=>> Sincronizado también en ${DESTINO}\n"
+					else
+						RESULTADO="${RESULTADO}\t=>> Error: No sincronizado en ${DESTINO}\n"
+					fi
+				fi
+			done
+		else
+			RESULTADO="${RESULTADO}=> Error: ${RUTA} no es un archivo o directorio válido ...\n"
+		fi
+		echo "${RESULTADO}"
+		((++NARCHIVO))
+		PORCENTAJE="$(( PORCENTAJE + INCREMENTO ))"
+		shift
+	done
+}
+
+function eliminar_del_escritorio_congelado() {
+	# Obtenemos la lista de los parámetros recibidos:
+	NUMPARAM="${#}"
+	INCREMENTO="$(echo 100/"$NUMPARAM" | bc)"
+	PORCENTAJE="$(( 0 + INCREMENTO ))"
+	NARCHIVO=1
+	RESULTADO="#"
+	# Comprobamos:
+	# 1) Que hay parámetros todavía por procesar
+	# 2) Si el parámetro es un archivo o directorio exitente en la máquina
+	until test -z "${1}" ; do
+		# Comprobamos:
+		# 1) Que hay parámetros todavía por procesar
+		# 2) Si el parámetro es un archivo o directorio exitente en la máquina
+		echo "${PORCENTAJE}"
+		RUTA="${DIRBASE}/$(basename "${1}")"
+		echo "#=> Eliminando ${RUTA} del sistema de congelación ..."
+		if [[ -f "${RUTA}" || -d "${RUTA}" ]] ; then
+			if rm -Rf "${RUTA}" > /dev/null 2>&1 ; then
+				RESULTADO="${RESULTADO}=> Ok: ${RUTA} - Eliminado del Sistema de Congelación\n"
+			else
+				RESULTADO="${RESULTADO}=> Error: ${RUTA} - Problemas con el Sistema de Congelación\n"
+			fi
+		else
+			RESULTADO="${RESULTADO}=> Error: No se encuentra ${RUTA} en el Sistema de Congelación\n"
+		fi
+		echo "${RESULTADO}"
+		((++NARCHIVO))
+		PORCENTAJE="$(( PORCENTAJE + INCREMENTO ))"
+		shift
+	done
+}
+
+function gestionar_escritorio_congelado() {
+	if test -d "${DIRBASE}" ; then
+		pcmanfm "${DIRBASE}"
+	fi
+}
+
+if test -z "${1}" ; then
+    echo "#=> Error: Debe pasarse como parámetro al menos la acción a gestionar: del/add/man"
+    exit 1
+else
+	OPCION="${1}"
+	shift
+	case "${OPCION}" in
+		"del" )
+		eliminar_del_escritorio_congelado "${@}"
+		;;
+		"add" )
+		mantener_en_escritorio_congelado "${@}"
+		;;
+		"man" )
+		gestionar_escritorio_congelado
+		;;
+	esac
+	exit 0
+fi

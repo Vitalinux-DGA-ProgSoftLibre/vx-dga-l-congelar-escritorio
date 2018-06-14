@@ -1,0 +1,25 @@
+[Desktop Entry]
+Type=Action
+
+Name=Manage Frozen Desktop
+Name[en]=Manage Frozen Desktop
+Name[es_ES]=Gestionar Escritorio Congelado
+Name[es]=Gestionar Escritorio Congelado
+
+ToolbarLabel=Manage Frozen Desktop
+ToolbarLabel[en]=Manage Frozen Desktop
+ToolbarLabel[es_ES]=Mantener en Escritorio Congelado
+ToolbarLabel[es]=Mantener en Escritorio Congelado
+
+Profiles=profile-zero;
+
+Icon=congelacion
+Icon[es]=congelacion
+Icon[es_ES]=congelacion
+
+[X-Action-Profile profile-zero]
+MimeTypes=all/allfiles;inode/directory;
+Exec=/usr/bin/vx-pk-congelacion-gestionar-escritorio man
+Name=Default profile
+Name[es]=Default profile
+Name[es_ES]=Default profile

@@ -1,0 +1,26 @@
+[Desktop Entry]
+Type=Action
+
+Name=Remove from the Frozen Desk
+Name[en]=Remove from the Frozen Desk
+Name[es_ES]=Eliminar del Escritorio Congelado
+Name[es]=Eliminar del Escritorio Congelado
+
+ToolbarLabel=Remove from the Frozen Desk
+ToolbarLabel[en]=Remove from the Frozen Desk
+ToolbarLabel[es_ES]=Eliminar del Escritorio Congelado
+ToolbarLabel[es]=Eliminar del Escritorio Congelado
+
+Profiles=profile-zero;
+
+Icon=congelacion
+Icon[en]=congelacion
+Icon[es]=congelacion
+Icon[es_ES]=congelacion
+
+[X-Action-Profile profile-zero]
+MimeTypes=all/allfiles;inode/directory;
+Exec=/usr/bin/vx-pk-congelacion-gestionar-escritorio del %F
+Name=Default profile
+Name[es]=Default profile
+Name[es_ES]=Default profile

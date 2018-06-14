@@ -1,3 +1,16 @@
+vx-dga-l-congelar-escritorio (2.0-2) unstable; urgency=low
+
+  * Añadimos acciones para el Explorador de Archivos relacionadas con la Congelación
+
+ -- Arturo Martín <amartinromero@gmail.com>  Tue, 5 Jun 2018 09:52:06 +0200
+
+vx-dga-l-congelar-escritorio (2.0-1) unstable; urgency=low
+
+  * Se hace uso del script de regeneración del Entorno de Escritorio vx-regenerar-entorno-escritorio-cli
+  * Se añade la dependencia con el paquete vx-dga-l-scripts que contiene el script anterior
+
+ -- Arturo Martín <amartinromero@gmail.com>  Tue, 19 Dec 2017 09:52:06 +0200
+
 vx-dga-l-congelar-escritorio (1.1-2) unstable; urgency=low
 
   * Upgrade a la nueva version de tareas-logout, para que solo se realicen en el caso de cerrar X.

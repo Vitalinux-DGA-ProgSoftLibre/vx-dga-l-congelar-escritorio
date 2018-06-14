@@ -1,0 +1,50 @@
+#!/bin/bash
+
+EJECUTOR=$(whoami)
+
+if ! test "${EJECUTOR}" = "root" ; then
+	echo "#=> Debes acceder con permisos de root para actuar sobre la congelación ..."
+	exit 1
+fi
+
+function mostrar_error() {
+	TEXTO="\t<b>¡¡Error!!</b> Debes pasar al menos un parámetro en la llamada ..."
+	TEXTO="${TEXTO}\n<b>del</b>: Para <b>eliminar</b> elementos del Escritorio Congelado"
+	TEXTO="${TEXTO}\n<b>add</b>: Para <b>añadir</b> elementos al Escritorio Congelado"
+	TEXTO="${TEXTO}\n<b>man</b>: Para <b>gestionar</b> el Escritorio Congelado"
+	yad --title "${TITULO}" \
+		--window-icon vitalinux-congelacion \
+		--image congelacion \
+		--width 600 \
+		--center \
+		--text-info \
+		--text "${TEXTO}" \
+		--button="Cerrar":0
+	exit 1
+}
+
+TITULO="Gestión del Escritorio Congelado"
+
+if test -z "${1}" ; then
+    echo "#=> Error: Debe pasarse como parámetro al menos la acción a gestionar: del/add/man"
+	mostrar_error
+	exit 1
+else
+	OPCION="${1}"
+	case "${OPCION}" in
+	"del"|"add" )
+		(
+			vx-congelacion-gestionar-escritorio-cli "$@"
+		) | yad --title "${TITULO}" \
+				--window-icon vitalinux-congelacion \
+				--image congelacion \
+				--width 660 \
+				--center \
+				--progress --percentage=0 --button="Cerrar":0
+	;;
+	"man" )
+		vx-congelacion-gestionar-escritorio-cli "$@"
+	;;
+	esac
+	exit 0
+fi

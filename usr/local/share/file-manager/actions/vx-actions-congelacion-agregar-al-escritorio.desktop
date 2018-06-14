@@ -1,0 +1,27 @@
+[Desktop Entry]
+Type=Action
+
+Name=Add to the Frozen Desk
+Name[en]=Add to the Frozen Desk
+Name[es_ES]=Añadir al Escritorio Congelado
+Name[es]=Añadir al Escritorio Congelado
+
+ToolbarLabel=Add to the Frozen Desk
+ToolbarLabel[en]=Add to the in Frozen Desk
+ToolbarLabel[es_ES]=Añadir al Escritorio Congelado
+ToolbarLabel[es]=Añadir al Escritorio Congelado
+
+Profiles=profile-zero;
+
+Icon=congelacion
+Icon[en]=congelacion
+Icon[es]=congelacion
+Icon[es_ES]=congelacion
+
+[X-Action-Profile profile-zero]
+MimeTypes=all/allfiles;inode/directory;
+Exec=/usr/bin/vx-pk-congelacion-gestionar-escritorio add %F
+Name=Default profile
+Name[en]=Default profile
+Name[es]=Default profile
+Name[es_ES]=Default profile

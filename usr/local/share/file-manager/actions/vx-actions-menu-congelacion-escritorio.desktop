@@ -1,0 +1,19 @@
+[Desktop Entry]
+Type=Menu
+
+Icon[es_ES]=congelacion
+Icon[es]=congelacion
+Icon=congelacion
+Icon[en]=congelacion
+
+Name=Freezing Utilities
+Name[en]=Freezing Utilities
+Name[es_ES]=Utilidades Congelación
+Name[es]=Utilidades Congelación
+
+Tooltip=Utilities to freeze files
+Tooltip[en]=Utilities to freeze files
+Tooltip[es_ES]=Utilidades del sistema de Congelación
+Tooltip[es]=Utilidades del sistema de Congelación
+
+ItemsList=vx-actions-congelacion-agregar-al-escritorio;vx-actions-congelacion-eliminar-del-escritorio;vx-actions-congelacion-gestionar-escritorio

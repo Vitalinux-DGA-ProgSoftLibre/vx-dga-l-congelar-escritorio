@@ -3,12 +3,14 @@ Section: x11
 Priority: extra
 Maintainer: Ángel Lafuente <angel.lafuentezgz@gmail.com>
 Build-Depends: debhelper (>= 8.0.0)
-Standards-Version: 3.9.3
+Standards-Version: 3.9.7
 Homepage: https://github.com/Vitalinux-DGA-ProgSoftLibre
 
 Package: vx-dga-l-congelar-escritorio
 Architecture: all
 Pre-Depends: vx-utils
-Depends: ${misc:Depends}, vx-dga-l-desktop-wallpaper, vx-dga-l-menu, vx-dga-l-migasfree-launcher (>=5.1), vx-dga-l-skel-usuarios (>=1.1)
-Description: Congelación de escritorio.
- Congelación de escritorio y borrado de ficheros.
+Depends: ${misc:Depends}, vx-dga-l-desktop-wallpaper, vx-dga-l-migasfree-launcher (>=5.1), vx-dga-l-skel-usuarios (>=1.1), vx-dga-l-scripts-inicio-apagado, vx-dga-l-scripts (>=3.2-6)
+Description: Congelación del Entorno de Escritorio.
+ Congelación de Escritorio basada en:
+ 1) La sincronización con el contenido del directorio ubicado en: /etc/skel/Escritorio
+ 2) La regeneración de los archivos de configuración del Entorno de Escritorio
