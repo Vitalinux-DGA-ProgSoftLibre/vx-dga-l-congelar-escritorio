@@ -11,9 +11,9 @@ Tod@s aquell@s que deseen percibir que los elementos y aspecto del Escritorio no
 
 Haciendo uso de **Script Actions** se permitirá al usuario personalizar el patrón de Escritorio Congelado ubicado en **/etc/skel/Escritorio**.  En concreto se podrá llevar a cabo las siguientes acciones:
 
-* Añadir elementos (*archivos, carpetas, lanzadores, etc.*) al patrón de Escritorio Congelado
-* Eliminar elementos del patrón de Escritorio Congelado
-* Gestionar el Escritorio Congelado.  Para ello se abrirá el directorio patrón con permisos de **root** desde nuestro **explorador de archivos** (*en LXDE pcmanfm*)
+* Añadir elementos (*archivos, carpetas, lanzadores, etc.*) al patrón de Escritorio Congelado: **/etc/skel/Escritorio**
+* Eliminar elementos del patrón de Escritorio Congelado: **/etc/skel/Escritorio**
+* Gestionar el Escritorio Congelado.  Para ello se abrirá el directorio patrón **/etc/skel/Escritorio** con permisos de **root** desde nuestro **explorador de archivos** (*en LXDE pcmanfm*)
 
 # Como Crear o Descargar el paquete DEB a partir del codigo de GitHub
 En caso de querer modificar y mejorar el paquete, será necesario crear de nuevo el paquete.  Para crear el paquete DEB será necesario encontrarse dentro del directorio donde localizan los directorios que componen el paquete.  Una vez allí, se ejecutará el siguiente comando (es necesario tener instalados los paquetes apt-get install debhelper devscripts):
